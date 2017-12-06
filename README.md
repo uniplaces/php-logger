@@ -1,1 +1,1 @@
-# php-logger
+# phpLogger
