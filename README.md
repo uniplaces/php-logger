@@ -18,7 +18,7 @@ $ make setup
 In order to use the common processor you have to register it in the service.yaml:
 ```yaml
     monolog.common_processor:
-        class: phpLogger\Monolog\Processors\CommonProcessor
+        class: Uniplaces\Monolog\Processors\CommonProcessor
         arguments:
             - "@request_stack"
             - '%env(APP_ID)%'
