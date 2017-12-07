@@ -75,7 +75,6 @@ class CommonProcessor
             'git-hash' => $this->gitHash
         ];
 
-
         return array_merge($commonFields, $record);
     }
 

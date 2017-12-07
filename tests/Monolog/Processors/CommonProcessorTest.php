@@ -2,11 +2,10 @@
 
 namespace tests\Monolog\Processors;
 
-use Symfony\Component\HttpFoundation\Request;
-use Uniplaces\Monolog\Processors\CommonProcessor;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Uniplaces\Monolog\Processors\CommonProcessor;
 
 /**
  * CommonProcessorTest
@@ -33,7 +32,7 @@ class CommonProcessorTest extends TestCase
                 'channel' => 'app',
                 'datetime' => '',
                 'level_name' => 'DEBUG',
-                'level' => 0
+                'level' => 'info'
             ]
         );
 
@@ -43,7 +42,7 @@ class CommonProcessorTest extends TestCase
         $this->assertEquals('1e9461e43de8efake2f73d4ba27G853/503Ac9c0', $actualLogEntry['git-hash']);
         $this->assertEquals('DEBUG', $actualLogEntry['level_name']);
         $this->assertEquals('staging', $actualLogEntry['env']);
-        $this->assertEquals(0, $actualLogEntry['level']);
+        $this->assertEquals('info', $actualLogEntry['level']);
         $this->assertArrayHasKey('time', $actualLogEntry);
     }
 
@@ -63,7 +62,7 @@ class CommonProcessorTest extends TestCase
                 'channel' => 'app',
                 'datetime' => '',
                 'level_name' => 'DEBUG',
-                'level' => 0
+                'level' => 'info'
             ]
         );
 
@@ -80,7 +79,7 @@ class CommonProcessorTest extends TestCase
         $this->assertEquals('1e9461e43de8efake2f73d4ba27G853/503Ac9c0', $actualLogEntry['git-hash']);
         $this->assertEquals('DEBUG', $actualLogEntry['level_name']);
         $this->assertEquals('staging', $actualLogEntry['env']);
-        $this->assertEquals(0, $actualLogEntry['level']);
+        $this->assertEquals('info', $actualLogEntry['level']);
         $this->assertArrayHasKey('time', $actualLogEntry);
     }
 }
