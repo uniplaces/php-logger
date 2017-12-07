@@ -12,6 +12,5 @@
     },
     "autoload": {
         "psr-4": { "Uniplaces\\": "src/" }
-    },
-    "minimum-stability": "stable"
+    }
 }
