@@ -42,7 +42,7 @@ Also define a json formatter in order to be able to add the fields the log must 
 ## Running the tests
 
 ```bash
-$ make test
+$ make tests
 ```
 
 ## Contributing
