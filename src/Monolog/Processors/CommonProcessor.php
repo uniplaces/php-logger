@@ -1,8 +1,7 @@
 <?php
 
-namespace phpLogger\Monolog\Processors;
+namespace Uniplaces\Monolog\Processors;
 
-use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -11,6 +10,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class CommonProcessor
 {
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
     /**
      * @var string
      */
@@ -63,7 +67,7 @@ class CommonProcessor
     protected function buildCommon(array $record): array
     {
         $commonFields = [
-            'time' => Carbon::now()->toRfc3339String(),
+            'time' => time(),
             'app-id' => $this->appId,
             'env' => $this->env,
             'msg' => $record['message'],
@@ -71,9 +75,6 @@ class CommonProcessor
             'git-hash' => $this->gitHash
         ];
 
-        unset($record['datetime']);
-        unset($record['channel']);
-        unset($record['message']);
 
         return array_merge($commonFields, $record);
     }

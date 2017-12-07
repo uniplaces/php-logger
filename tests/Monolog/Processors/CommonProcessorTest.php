@@ -3,7 +3,7 @@
 namespace tests\Monolog\Processors;
 
 use Symfony\Component\HttpFoundation\Request;
-use phpLogger\Monolog\Processors\CommonProcessor;
+use Uniplaces\Monolog\Processors\CommonProcessor;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +19,6 @@ class CommonProcessorTest extends TestCase
 
     public function testProcessRecordConsole()
     {
-        Carbon::setTestNow(Carbon::now());
         $requestStack = $this->createMock(RequestStack::class);
         $requestStack
             ->expects($this->once())
@@ -38,25 +37,18 @@ class CommonProcessorTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
-            [
-                'type' => 'command',
-                'time' => Carbon::now()->toRfc3339String(),
-                'app-id' => 'uniplaces-core',
-                'msg' => 'some message',
-                'git-hash' => '1e9461e43de8efake2f73d4ba27G853/503Ac9c0',
-                'level_name' => 'DEBUG',
-                'env' => 'staging',
-                'level' => 0
-            ],
-            $actualLogEntry
-        );
-        Carbon::setTestNow();
+        $this->assertEquals('command', $actualLogEntry['type']);
+        $this->assertEquals('uniplaces-core', $actualLogEntry['app-id']);
+        $this->assertEquals('some message', $actualLogEntry['msg']);
+        $this->assertEquals('1e9461e43de8efake2f73d4ba27G853/503Ac9c0', $actualLogEntry['git-hash']);
+        $this->assertEquals('DEBUG', $actualLogEntry['level_name']);
+        $this->assertEquals('staging', $actualLogEntry['env']);
+        $this->assertEquals(0, $actualLogEntry['level']);
+        $this->assertArrayHasKey('time', $actualLogEntry);
     }
 
     public function testProcessRecordHttp()
     {
-        Carbon::setTestNow(Carbon::now());
         $requestStack = $this->createMock(RequestStack::class);
         $requestStack
             ->expects($this->exactly(2))
@@ -75,26 +67,20 @@ class CommonProcessorTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
-            [
-                'type' => 'symfony2/http',
-                'method' => 'GET',
-                'path' => 'http://localhost/path',
-                'content-type' => null,
-                'client-ip' => '127.0.0.1',
-                'user_agent' => 'Symfony/3.X',
-                'hostname' => 'localhost',
-                'referrer' => null,
-                'time' => Carbon::now()->toRfc3339String(),
-                'app-id' => 'uniplaces-core',
-                'msg' => 'some message',
-                'git-hash' => '1e9461e43de8efake2f73d4ba27G853/503Ac9c0',
-                'level_name' => 'DEBUG',
-                'env' => 'staging',
-                'level' => 0
-            ],
-            $actualLogEntry
-        );
-        Carbon::setTestNow();
+        $this->assertEquals('symfony2/http', $actualLogEntry['type']);
+        $this->assertEquals('GET', $actualLogEntry['method']);
+        $this->assertEquals('http://localhost/path', $actualLogEntry['path']);
+        $this->assertEquals(null, $actualLogEntry['content-type']);
+        $this->assertEquals('127.0.0.1', $actualLogEntry['client-ip']);
+        $this->assertEquals('Symfony/3.X', $actualLogEntry['user_agent']);
+        $this->assertEquals('localhost', $actualLogEntry['hostname']);
+        $this->assertEquals(null, $actualLogEntry['referrer']);
+        $this->assertEquals('uniplaces-core', $actualLogEntry['app-id']);
+        $this->assertEquals('some message', $actualLogEntry['msg']);
+        $this->assertEquals('1e9461e43de8efake2f73d4ba27G853/503Ac9c0', $actualLogEntry['git-hash']);
+        $this->assertEquals('DEBUG', $actualLogEntry['level_name']);
+        $this->assertEquals('staging', $actualLogEntry['env']);
+        $this->assertEquals(0, $actualLogEntry['level']);
+        $this->assertArrayHasKey('time', $actualLogEntry);
     }
 }
