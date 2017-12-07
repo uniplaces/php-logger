@@ -1,5 +1,5 @@
 {
-    "name": "uniplaces-monolog-extension",
+    "name": "uniplaces/uniplaces-monolog-extension",
     "description": "logger processors for uniplaces standards",
     "license": "MIT",
     "type": "library",
