@@ -1,3 +1,5 @@
+https://travis-ci.org/uniplaces/uniplaces-monolog-extension.svg?branch=master
+
 # Uniplaces monolog extension
 Package to support logging standards at uniplaces (www.uniplaces.com).
 The first only define a processor to decorate log with specific fields used to create filters.
