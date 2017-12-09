@@ -1,4 +1,4 @@
-https://travis-ci.org/uniplaces/uniplaces-monolog-extension.svg?branch=master
+[![Build Status](https://travis-ci.org/uniplaces/uniplaces-monolog-extension.svg?branch=master)](https://travis-ci.org/uniplaces/uniplaces-monolog-extension)
 
 # Uniplaces monolog extension
 Package to support logging standards at uniplaces (www.uniplaces.com).
